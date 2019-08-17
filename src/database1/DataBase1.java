@@ -33,21 +33,14 @@ public class DataBase1 {
             con=DriverManager.getConnection("jdbc:oracle:thin:@144.217.163.57:1521:XE", "hr", "inf5180");
             
             
-            String sql="select * from regions";
+            String sql="insert into regions (999, 'myNmae')";
             System.out.println(sql);
             
             
             stm=con.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-            int id;
-            String name;
-            while(rs.next()){
-                id =rs.getInt("region_id");
-                name=rs.getString(2);
-                System.out.println(id + " - " + name);
-              
-          }
-            rs.close();
+           int numberOfRows = stm.executeUpdate(sql);
+            System.out.println(numberOfRows);
+          
             stm.close();
             con.close();
             
