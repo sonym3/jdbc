@@ -30,29 +30,39 @@ public class DataBase1 {
         
         try {
             Class.forName("oracle.jdbc.OracleDriver");
+            
             con=DriverManager.getConnection("jdbc:oracle:thin:@144.217.163.57:1521:XE", "hr", "inf5180");
             
             
-            String sql="select * from regions";
+            //String sql="select * from regions";
+            String sql = "select countries.COUNTRY_ID,countries.COUNTRY_NAME , regions.REGION_NAME from countries join regions on countries.REGION_ID = regions.REGION_ID";
             System.out.println(sql);
             
             
             stm=con.createStatement();
             ResultSet rs = stm.executeQuery(sql);
-            int id;
-            String name;
+            //int id;
+            //String name;
+            String country_id;
+            String country_name;
+            String region_name;
             while(rs.next()){
-                id =rs.getInt("region_id");
+                /*id =rs.getInt("region_id");
                 name=rs.getString(2);
-                System.out.println(id + " - " + name);
+                System.out.println(id + " - " + name);*/
+                
+                country_id =rs.getString("country_id");
+                country_name = rs.getString("country_name");
+                region_name = rs.getString("region_name");
+                System.out.println(country_id + " - " + country_name + " - " + region_name);
+                
               
           }
             rs.close();
             stm.close();
             con.close();
             
-            
-            
+
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DataBase1.class.getName()).log(Level.SEVERE, null, ex);
